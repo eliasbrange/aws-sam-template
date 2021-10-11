@@ -1,0 +1,8 @@
+-r src/requirements.txt
+
+pytest
+pytest-cov
+
+flake8
+flake8-commas
+flake8-quotes

@@ -1,0 +1,4 @@
+.aws-sam
+.idea
+.venv
+.coverage

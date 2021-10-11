@@ -1,0 +1,21 @@
+version = 0.1
+
+[dev.deploy.parameters]
+s3_prefix = "SamTemplateDev"
+stack_name = "SamTemplateDev"
+region = "eu-west-1"
+capabilities = "CAPABILITY_NAMED_IAM"
+parameter_overrides = "Environment=dev"
+
+[stage.deploy.parameters]
+stack_name = "SamTemplateStage"
+region = "eu-west-1"
+capabilities = "CAPABILITY_NAMED_IAM"
+parameter_overrides = "Environment=stage"
+
+[prod.deploy.parameters]
+s3_prefix = "SamTemplateProd"
+stack_name = "SamTemplateProd"
+region = "eu-west-1"
+capabilities = "CAPABILITY_NAMED_IAM"
+parameter_overrides = "Environment=prod"
