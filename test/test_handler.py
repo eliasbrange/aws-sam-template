@@ -1,14 +1,14 @@
-from app import handler
+import app
 
 
 def test_get_quote():
-    res = handler.get_quote()
+    res = app.get_quote()
 
     assert "author" in res
     assert "content" in res
 
 
 def test_handler():
-    res = handler.handler({}, {})
+    res = app.handler({}, {})
 
     assert "message" in res
