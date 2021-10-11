@@ -6,6 +6,15 @@ Globals:
   Function:
     Timeout: 30
 
+Parameters:
+  Environment:
+    Description: The environment to deploy to
+    Type: String
+    AllowedValues:
+      - Prod
+      - Stage
+      - Dev
+    Default: Dev
 
 Resources:
   FunctionRole:
@@ -35,7 +44,7 @@ Resources:
   Function:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: AWSSamTemplate
+      FunctionName: !Sub "AWSSamTemplate${Environment}"
       MemorySize: 128
       CodeUri: src
       Handler: app.handler
@@ -46,5 +55,5 @@ Resources:
     DependsOn: Function
     Type: AWS::Logs::LogGroup
     Properties:
-      LogGroupName: /aws/lambda/SCSPublisher
+      LogGroupName: !Sub "/aws/lambda/AWSSamTemplate${Environment}"
       RetentionInDays: 30

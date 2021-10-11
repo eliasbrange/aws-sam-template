@@ -5,17 +5,18 @@ s3_prefix = "SamTemplateDev"
 stack_name = "SamTemplateDev"
 region = "eu-west-1"
 capabilities = "CAPABILITY_NAMED_IAM"
-parameter_overrides = "Environment=dev"
+parameter_overrides = "Environment=Dev"
 
 [stage.deploy.parameters]
+s3_prefix = "SamTemplateStage"
 stack_name = "SamTemplateStage"
 region = "eu-west-1"
 capabilities = "CAPABILITY_NAMED_IAM"
-parameter_overrides = "Environment=stage"
+parameter_overrides = "Environment=Stage"
 
 [prod.deploy.parameters]
 s3_prefix = "SamTemplateProd"
 stack_name = "SamTemplateProd"
 region = "eu-west-1"
 capabilities = "CAPABILITY_NAMED_IAM"
-parameter_overrides = "Environment=prod"
+parameter_overrides = "Environment=Prod"
