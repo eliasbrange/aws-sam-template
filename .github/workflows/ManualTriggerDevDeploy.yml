@@ -5,4 +5,4 @@ on:
 
 jobs:
   test-and-lint:
-    uses: .github/workflows/LintAndTest.yml@{{ github.ref	}}
+    uses: eliasbrange/aws-sam-template/.github/workflows/LintAndTest.yml@main
