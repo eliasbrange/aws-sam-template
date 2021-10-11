@@ -39,7 +39,7 @@ Resources:
       MemorySize: 128
       CodeUri: src
       Handler: app.handler
-      Runtime: python3.8
+      Runtime: python3.9
       Role: !GetAtt FunctionRole.Arn
 
   FunctionLogGroup:

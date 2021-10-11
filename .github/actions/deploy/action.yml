@@ -1,0 +1,44 @@
+name: "Deploy Action"
+description: "Deploys the SAM template"
+
+inputs:
+  config-env:
+    description: "SAM config env to use"
+    required: true
+  aws-access-key-id:
+    description: "AWS_ACCESS_KEY_ID"
+    required: true
+  aws-secret-access-key:
+    description: "AWS_SECRET_ACCESS_KEY"
+    required: true
+  sam-bucket:
+    description: "SAM Bucket to use for artifacts"
+    required: true
+  pipeline-role:
+    description: "IAM role to use to manage pipeline"
+    required: true
+  deploy-role:
+    description: "IAM role to use to deploy resources"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v2
+    - uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ inputs.aws-access-key-id }}
+        aws-secret-access-key: ${{ inputs.aws-secret-access-key }}
+        aws-region: eu-west-1
+        role-to-assume: ${{ inputs.pipeline-role }}
+        role-duration-seconds: 900
+        role-session-name: AssumedPipelineRole
+        role-skip-session-tagging: true
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - uses: aws-actions/setup-sam@v1
+    - run: sam build
+      shell: bash
+    - run: sam deploy --config-env ${{ inputs.config-env }} --no-fail-on-empty-changeset --no-confirm-changeset --s3-bucket ${{ inputs.sam-bucket }} --role-arn ${{ inputs.deploy-role }}
+      shell: bash

@@ -6,3 +6,17 @@ on:
 jobs:
   test-and-lint:
     uses: eliasbrange/aws-sam-template/.github/workflows/LintAndTest.yml@main
+  deploy:
+    runs-on: ubuntu-latest
+    environment: development
+    needs: [test-and-lint]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/deploy
+        with:
+          config-env: dev
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          sam-bucket: ${{ secrets.SAM_BUCKET }}
+          pipeline-role: ${{ secrets.PIPELINE_ROLE }}
+          deploy-role: ${{ secrets.DEPLOY_ROLE }}
