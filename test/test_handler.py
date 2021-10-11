@@ -7,6 +7,8 @@ def test_get_quote():
     assert "author" in res
     assert "content" in res
 
+    assert "thisWillFailPytestAndMakeFlake8FailAswell..............................." in res
+
 
 def test_handler():
     res = app.handler({}, {})
