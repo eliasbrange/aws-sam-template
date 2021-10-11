@@ -7,7 +7,7 @@ QUOTE_URL = "https://api.quotable.io/random"
 def handler(event, context):
     quote = get_quote()
     return {
-        "message": f"\"{quote['content']} - {quote['author']}\""
+        "message": f"\"{quote['content']} - {quote['author']}\"",
     }
 
 
